@@ -7,7 +7,7 @@
 //an error
 double Matrices::operator+(const Matrix& a, const Matrix& b)
 {
-Matrix sum(a.getRows(),a.getCols())
+Matrix sum(a.getRows(),a.getCols());
   try
   {
     if(a.getRows()!= b.getRows()) {error("Matrices must have equal number of rows!\n");}
@@ -17,7 +17,7 @@ Matrix sum(a.getRows(),a.getCols())
     {
       for(int c =0; c < a.getCols(); c++)
       {
-        sum.operator(r,c)= a.operator(r,c) + b.operator(r,c);
+        sum.operator()(r,c)= a.operator()(r,c) + b.operator()(r,c);
       }
     }
   }
@@ -50,7 +50,7 @@ double Matrices::operator*(const Matrix& a, const Matrix& b)
 
  for(int i = 0, i<n; i++)
   {for(int j = 0; j<p; j++)
-    for(int k=0; k<m;k++){product.operator(i,j)= a.operator(i,j)*b.operator(i,j);}
+    for(int k=0; k<m;k++){product.operator()(i,j)= a.operator()(i,j)*b.operator()(j,k);}
   }
 }
 
@@ -94,7 +94,7 @@ void Matrices::operator<<(ostream& os, const Matrix& a)
   {
     for(int c =0; c <a.getCols(); c++)
     {
-      cout << a.operator(r,c) const << " "<<;
+      cout << a.operator()(r,c) const << " "<<;
     } //where do I put const
     cout << "\n";
   }
@@ -103,7 +103,7 @@ void Matrices::operator<<(ostream& os, const Matrix& a)
   {
     for(int c =0; c <b.getCols(); c++)
     {
-      cout << b.operator(r,c) const << " "<<;
+      cout << b.operator()(r,c) const << " "<<;
     } //where do I put const
     cout << "\n";
   }

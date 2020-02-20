@@ -45,23 +45,23 @@ namespace Matrices
 
     ///Add each corresponding element.
     ///usage:  c = a + b;
-    double Matrix operator+(const Matrix& a, const Matrix& b);
+    double Matrix::operator+(const Matrix& a, const Matrix& b);
 
     ///Matrix multiply.  See description.
     ///usage:  c = a * b;
-    double Matrix operator*(const Matrix& a, const Matrix& b);
+    double Matrix::operator*(const Matrix& a, const Matrix& b);
 
     ///Matrix comparison.  See description.
     ///usage:  a == b
-    bool operator==(const Matrix& a, const Matrix& b);
+    bool Matrix::operator==(const Matrix& a, const Matrix& b);
 
     ///Matrix comparison.  See description.
     ///usage:  a != b
-    bool operator!=(const Matrix& a, const Matrix& b);
+    bool Matrix::operator!=(const Matrix& a, const Matrix& b);
 
     ///Output matrix.
     ///Separate columns by ' ' and rows by '\n'
-    ostream& operator<<(ostream& os, const Matrix& a);
+    ostream& Matrix::operator<<(ostream& os, const Matrix& a);
 }
 
 #endif // MATRIX_H_INCLUDED
