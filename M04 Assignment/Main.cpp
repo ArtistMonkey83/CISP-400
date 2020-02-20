@@ -1,6 +1,7 @@
  b#include "Matrices.h"
 #include "../std_lib_facilities"
 
+using namespace Matrices
 int main()
 {
   try

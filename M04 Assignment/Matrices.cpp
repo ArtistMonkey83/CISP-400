@@ -1,11 +1,12 @@
 #include "Matrices.h"
 #include "../std_lib_facilities.h"
 
+namespace Matrices
 //Add each corresponding element construct a local matrix to store
 //the result and return it using c = a + b
 //if a and b do not have the same number of rows and colomns throw
 //an error
-double Matrices::operator+(const Matrix& a, const Matrix& b)
+Matrix operator+(const Matrix& a, const Matrix& b)
 {
 Matrix sum(a.getRows(),a.getCols());
   try
@@ -17,7 +18,7 @@ Matrix sum(a.getRows(),a.getCols());
     {
       for(int c =0; c < a.getCols(); c++)
       {
-        sum.operator()(r,c)= a.operator()(r,c) + b.operator()(r,c);
+        sum(r,c)= a(r,c) + b(r,c);
       }
     }
   }
@@ -41,16 +42,16 @@ Matrix sum(a.getRows(),a.getCols());
 //create a running sum when the j loops is finished store in c(i,k)
 //if the number of columns and rows in a and b dont match throw and error
 //construct a local matrix to store the result and return it.
-double Matrices::operator*(const Matrix& a, const Matrix& b)
+Matrix operator*(const Matrix& a, const Matrix& b)
 {
  Matrix product(a.getRows(),a.getCols());
- int n = a.size();
- int m = a[0].size();
+ int n = a.size();      //this needs to be fixed no size function for matrix
+ int m = a[0].size();   //this needs to be fixed no size function for matrix
  int p = b[0].size();
 
- for(int i = 0, i<n; i++)
+ for(int i = 0; i<n; i++)
   {for(int j = 0; j<p; j++)
-    for(int k=0; k<m;k++){product.operator()(i,j)= a.operator()(i,j)*b.operator()(j,k);}
+    for(int k=0; k<m;k++){product(i,j)= a(i,j)*b(j,k);}
   }
 }
 
@@ -58,7 +59,7 @@ double Matrices::operator*(const Matrix& a, const Matrix& b)
 
 //if the rows and columns are not equal return false
 //if any element (i,j) doesnt match return false otherwise return true
-bool Matrices::operator==(const Matrix& a, const Matrix& b)
+bool operator==(const Matrix& a, const Matrix& b)
 {
   if(a.getRows()!=b.getRows()) {error("Matrices must have the same number of rows!\n"); return false;}
 
@@ -72,7 +73,7 @@ bool Matrices::operator==(const Matrix& a, const Matrix& b)
 
 
 //opposite of ==operator
-bool Matrices::operator!=(const Matrix& a, const Matrix& b)
+bool operator!=(const Matrix& a, const Matrix& b)
 {
   if(a.getRows()==b.getRows())
   {return false;}
@@ -85,7 +86,7 @@ bool Matrices::operator!=(const Matrix& a, const Matrix& b)
 
 
 //Output operator will out put matrices in the format with columns separated by ' ' and rows by '\n' you can specify the width of your columns useing setw from <iomanip>
-void Matrices::operator<<(ostream& os, const Matrix& a)
+bool operator<<(ostream& os, const Matrix& a)
 {
   setw(11);
   cout << "a:\n";
@@ -94,17 +95,16 @@ void Matrices::operator<<(ostream& os, const Matrix& a)
   {
     for(int c =0; c <a.getCols(); c++)
     {
-      cout << a.operator()(r,c) const << " "<<;
+      cout << a(r,c) << " "<<endl;
     } //where do I put const
     cout << "\n";
-  }
+
   cout << "b:\n";
   for(int r =0; r < b.getRows(); r++)
   {
     for(int c =0; c <b.getCols(); c++)
-    {
-      cout << b.operator()(r,c) const << " "<<;
-    } //where do I put const
-    cout << "\n";
+      os << b(r,c) << " "<<endl;
+  } //where do I put const
+    os << "\n";
   }
 }
