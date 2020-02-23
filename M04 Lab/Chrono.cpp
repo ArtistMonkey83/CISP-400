@@ -1,5 +1,8 @@
 #include "Chrono.h"
+#include "../std_lib_facilities.h"
 
+using namespace Chrono;
+{
 Date::Date():y{2001},m{Month::jan},d{1}
    {}
 
@@ -49,10 +52,10 @@ Month operator+(const Month& m, int nMonths)	// addition
 
    Month operator+=(Month& m, int nMonths)	// addition
    {
-    /*   int mInt = (int)m + nMonths - 1; ///-1 to align with [0...11] for mod
+       int mInt = (int)m + nMonths - 1; ///-1 to align with [0...11] for mod
        mInt %= 12;  // “wrap around”
        m = Month(mInt + 1); ///+1 to align back with [1..12]
-*/
+
        m = m + nMonths
        return m;
    }
@@ -79,7 +82,7 @@ ostream& operator<<(ostream& os, const Date& d)
        int y, m, d;
        char ch1, ch2, ch3, ch4;
        is >> ch1 >> y >> ch2 >> m >> ch3 >> d >> ch4;
-       if (!is) return is;
+      // if (!is) return is;
        if (ch1!= '(' || ch2!=',' || ch3!=',' || ch4!=')')
        { // oops: format error
            is.clear(ios_base::failbit); // set the fail bit
@@ -98,7 +101,8 @@ ostream& operator<<(ostream& os, const Date& d)
                //overloaded operators
                //m = m + 1; this is optional
                //m += 1;    this is optional we could use them
-               ++m;
+               m++;
                if(m == Month::jan) y++;
            }
        }
+}

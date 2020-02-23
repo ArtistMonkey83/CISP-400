@@ -1,19 +1,20 @@
-#ifndef YOUR_MOMMA
-#define YOUR_MOMMA
+#ifndef Date_h
+#define Date_h
 
 #include "../std_lib_facilities.h"
 
-enum Class Month {
+
+enum class Month {
   jan=1, feb,mar,apr,may,jun,jul,aug,sep,oct,nov,dec
 };
 
 class Date // uses Month
 {
 public:
-    class Invalid{};
+    class invalid{};
     Date(int y, Month m, int d);
 
-    Date(); // default constructor
+    //Date();  default constructor
 
     int day() const {return d;}
     Month month() const{return m;}   //refering to the Month class
@@ -26,8 +27,8 @@ public:
     Month m;
     int d;
 
-    bool is_valid(int y, Month m, int d);
+    bool is_valid(int yy, Month mm, int dd);
     int nDays(Month m);
-}
+};
 
 #endif

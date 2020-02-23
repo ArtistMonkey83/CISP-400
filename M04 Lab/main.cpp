@@ -1,23 +1,25 @@
 #include "Chrono.h"
-///using namespace Chrono; //this prevents having to use Chrono::
+#include "../std_lib_facilities.h"
+
+using namespace Chrono; //this prevents having to use Chrono::
 
 int main()
 {
-    Chrono::Date d1;
+    Date d1;
     cout << "default: " << d1 << endl;  ///use overloaded <<
 
-    Chrono::Date d2{2019, Chrono::Month::dec, 31};
+    Date d2{2019, Month::dec, 31};
     cout << "today: " << d2 << endl;
 
     try
     {
-        Chrono::Date d3{2018, Chrono::Month::feb, 99};
+        Date d3{2018, Month::feb, 99};
     }
-    catch(Chrono::Date::Invalid)
+    catch(Date::invalid)
     {
         cout << "Invalid date!" << endl;
     }
-    Chrono::Date d4;
+    Date d4;
 
       cout << "Type a date (Y, M, D): ";
       cin >> d4;  ///use overloaded >>
