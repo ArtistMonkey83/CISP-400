@@ -1,11 +1,23 @@
 #include "Chrono.h"
-#include "../std_lib_facilities.h"
 
-using namespace Chrono;
+namespace Chrono
 {
+
 Date::Date():y{2001},m{Month::jan},d{1}
    {}
-
+Date::Date(int y, Month m, int d)
+{
+  if(is_valid(y,m,d))
+  {
+    this->y=y;
+    this->m=m;    //assigning passed arguments y,m,d
+    this->d=d;    //this -> points to private members and assigns the passed by reference parameters
+  }
+  else
+  {
+    throw invalid{};
+  }
+}
 //int Date::nDays(Month m)
 //bool Date::is_valid(int y, Month m, int d)
 //void Date::add_day()
@@ -56,16 +68,18 @@ Month operator+(const Month& m, int nMonths)	// addition
        mInt %= 12;  // “wrap around”
        m = Month(mInt + 1); ///+1 to align back with [1..12]
 
-       m = m + nMonths
+       m = m + nMonths;
        return m;
    }
 
 
 bool operator==(const Date& a, const Date& b)
 {
-		return a.year()==b.year()
+		if(a.year()==b.year()
 		&& a.month()==b.month()
-		&& a.day()==b.day();
+		&& a.day()==b.day())return true;
+
+    return false;
 }
 
 bool operator!=(const Date& a, const Date& b) { return !(a==b); }
@@ -82,13 +96,13 @@ ostream& operator<<(ostream& os, const Date& d)
        int y, m, d;
        char ch1, ch2, ch3, ch4;
        is >> ch1 >> y >> ch2 >> m >> ch3 >> d >> ch4;
-      // if (!is) return is;
+      if (!is) return is;
        if (ch1!= '(' || ch2!=',' || ch3!=',' || ch4!=')')
        { // oops: format error
            is.clear(ios_base::failbit); // set the fail bit
-           return is;
+           //return is;
        }
-       dd = Date(y, Month(m),d); // update dd
+       dd = Date(y,(Month)m,d); // update dd
        return is;
    }
 
@@ -101,7 +115,7 @@ ostream& operator<<(ostream& os, const Date& d)
                //overloaded operators
                //m = m + 1; this is optional
                //m += 1;    this is optional we could use them
-               m++;
+               ++m;
                if(m == Month::jan) y++;
            }
        }
