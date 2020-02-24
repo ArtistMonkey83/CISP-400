@@ -15,7 +15,7 @@ Date::Date(int y, Month m, int d)
   }
   else
   {
-    throw invalid{};
+    throw Invalid{};
   }
 }
 //int Date::nDays(Month m)
@@ -64,12 +64,8 @@ Month operator+(const Month& m, int nMonths)	// addition
 
    Month operator+=(Month& m, int nMonths)	// addition
    {
-       int mInt = (int)m + nMonths - 1; ///-1 to align with [0...11] for mod
-       mInt %= 12;  // “wrap around”
-       m = Month(mInt + 1); ///+1 to align back with [1..12]
-
-       m = m + nMonths;
-       return m;
+      m = m+nMonths;
+       return m+nMonths;
    }
 
 

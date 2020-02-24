@@ -1,7 +1,7 @@
 #ifndef DATE_h
 #define DATE_h
 
-#include "../std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
 namespace Chrono
 {
@@ -12,7 +12,7 @@ enum class Month {
 class Date // uses Month
 {
 public:
-    class invalid{};
+    class Invalid{};
     Date(int y, Month m, int d);
 
     Date();  //default constructor
