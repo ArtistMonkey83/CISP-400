@@ -1,7 +1,7 @@
 #ifndef MATRIX_H_INCLUDED
 #define MATRIX_H_INCLUDED
 
-#include "../std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
 namespace Matrices
 {
@@ -10,11 +10,11 @@ namespace Matrices
         public:
             ///Construct a matrix of the specified size.
             ///Initialize each element to 0.
-            Matrix(int _rows, int _cols)
-            {
+            Matrix(int _rows, int _cols);
+          /*  {
               vector<vector<double> > matrix(_rows);
               for(int i = 0; i<_rows; i++){matrix[i].resize(_cols);}
-            }
+            }*/
             ///************************************
             ///inline accessors / mutators, these are done:
 
@@ -45,23 +45,23 @@ namespace Matrices
 
     ///Add each corresponding element.
     ///usage:  c = a + b;
-    double Matrix::operator+(const Matrix& a, const Matrix& b);
+    Matrix operator+(const Matrix& a, const Matrix& b);
 
     ///Matrix multiply.  See description.
     ///usage:  c = a * b;
-    double Matrix::operator*(const Matrix& a, const Matrix& b);
+    Matrix operator*(const Matrix& a, const Matrix& b);
 
     ///Matrix comparison.  See description.
     ///usage:  a == b
-    bool Matrix::operator==(const Matrix& a, const Matrix& b);
+    bool operator==(const Matrix& a, const Matrix& b);
 
     ///Matrix comparison.  See description.
     ///usage:  a != b
-    bool Matrix::operator!=(const Matrix& a, const Matrix& b);
+    bool operator!=(const Matrix& a, const Matrix& b);
 
     ///Output matrix.
     ///Separate columns by ' ' and rows by '\n'
-    ostream& Matrix::operator<<(ostream& os, const Matrix& a);
+    ostream& operator<<(ostream& os, const Matrix& a);
 }
 
 #endif // MATRIX_H_INCLUDED

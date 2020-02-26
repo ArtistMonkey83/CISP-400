@@ -1,32 +1,33 @@
 #include "Matrices.h"
-#include "../std_lib_facilities.h"
+//#include "../std_lib_facilities.h"
 
 namespace Matrices
+{
+Matrix::Matrix(int _rows, int _cols)
+{
+  rows = _rows;
+  cols = _cols;
+  for(int i = 0; i<_rows; i++)
+  {a.push_back(vector<double> (_cols,0));}
+}
 //Add each corresponding element construct a local matrix to store
 //the result and return it using c = a + b
 //if a and b do not have the same number of rows and colomns throw
 //an error
 Matrix operator+(const Matrix& a, const Matrix& b)
 {
-Matrix sum(a.getRows(),a.getCols());
-  try
-  {
-    if(a.getRows()!= b.getRows()) {error("Matrices must have equal number of rows!\n");}
-    if(a.getCols()!= b.getCols()) {error("Matrices must have equal number of columns!\n");}
+    if(!(a.getRows()== b.getRows())) {error("Matrices must have equal number of rows!\n");}
+    if(!(a.getCols()== b.getCols())) {error("Matrices must have equal number of columns!\n");}
+
+    Matrix sum(a.getRows(),a.getCols());
 
     for(int r =0; r < a.getRows(); r++)
     {
       for(int c =0; c < a.getCols(); c++)
-      {
-        sum(r,c)= a(r,c) + b(r,c);
-      }
+      {sum(r,c)= a(r,c) + b(r,c);}
     }
-  }
-  catch(...)
-  {
-    cerr << "exception \n";
-    keep_window_open();
-  }
+    return sum;
+
 }
 
 
@@ -44,67 +45,62 @@ Matrix sum(a.getRows(),a.getCols());
 //construct a local matrix to store the result and return it.
 Matrix operator*(const Matrix& a, const Matrix& b)
 {
- Matrix product(a.getRows(),a.getCols());
- int n = a.size();      //this needs to be fixed no size function for matrix
- int m = a[0].size();   //this needs to be fixed no size function for matrix
- int p = b[0].size();
-
- for(int i = 0; i<n; i++)
-  {for(int j = 0; j<p; j++)
-    for(int k=0; k<m;k++){product(i,j)= a(i,j)*b(j,k);}
+  if(a.getCols()!=b.getRows()) error("Matrices don't match!");
+  Matrix product(a.getRows(),b.getCols());
+  for(int r = 0 ; r < a.getRows() ; r++)
+  {
+    for(int c = 0 ; c < b.getCols() ; c++)
+    {
+      for(int k = 0 ; k < b.getRows() ; k++)
+      {product(r,c)+= a(r,k)*b(k,c);}
+    }
   }
+  return product;
 }
-
 
 
 //if the rows and columns are not equal return false
 //if any element (i,j) doesnt match return false otherwise return true
-bool operator==(const Matrix& a, const Matrix& b)
-{
-  if(a.getRows()!=b.getRows()) {error("Matrices must have the same number of rows!\n"); return false;}
+  bool operator==(const Matrix& a, const Matrix& b)
+  {
+    if(a.getRows()!=b.getRows()) {error("Matrices must have the same number of rows!\n"); return false;}
 
-  if(a.getCols()!=b.getCols())
-  {error("Matrices must have the same number of columns!\n"); return false;}
+    if(a.getCols()!=b.getCols())
+    {error("Matrices must have the same number of columns!\n"); return false;}
 
-  else return true;
+    bool isEqual= true;
 
-}
+    for(int r= 0; r<a.getRows() && isEqual; r++)
+    {for(int c = 0; c<a.getCols() && isEqual; c++)
+      {isEqual = (a(r,c)==b(r,c));}
+
+    }
+    return isEqual;
+  }
 
 
 
 //opposite of ==operator
-bool operator!=(const Matrix& a, const Matrix& b)
-{
-  if(a.getRows()==b.getRows())
-  {return false;}
-
-  if(a.getCols()==b.getCols())
-  {return false;}
-
-  else return true;
-}
+  bool operator!=(const Matrix& a, const Matrix& b)
+  {
+    return !(a==b);
+  }
 
 
 //Output operator will out put matrices in the format with columns separated by ' ' and rows by '\n' you can specify the width of your columns useing setw from <iomanip>
-bool operator<<(ostream& os, const Matrix& a)
-{
-  setw(11);
-  cout << "a:\n";
-
-  for(int r =0; r < a.getRows(); r++)
+  ostream& operator<<(ostream& os, const Matrix& a)
   {
-    for(int c =0; c <a.getCols(); c++)
+    os << endl;
+    for(int i = 0; i<a.getRows(); i++)
     {
-      cout << a(r,c) << " "<<endl;
-    } //where do I put const
-    cout << "\n";
-
-  cout << "b:\n";
-  for(int r =0; r < b.getRows(); r++)
-  {
-    for(int c =0; c <b.getCols(); c++)
-      os << b(r,c) << " "<<endl;
-  } //where do I put const
-    os << "\n";
+      os << endl;
+      for(int j=0; j<a.getCols(); j++)
+      {
+        os << setw(10)<<setprecision(7)<<a(i,j)<< " ";
+      }
+      os << endl;
+    }
+    os << endl;
+    return os;
   }
 }
