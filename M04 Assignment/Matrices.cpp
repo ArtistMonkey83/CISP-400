@@ -61,22 +61,17 @@ Matrix operator*(const Matrix& a, const Matrix& b)
 
 //if the rows and columns are not equal return false
 //if any element (i,j) doesnt match return false otherwise return true
-  bool operator==(const Matrix& a, const Matrix& b)
-  {
-    if(a.getRows()!=b.getRows()) {error("Matrices must have the same number of rows!\n"); return false;}
-
-    if(a.getCols()!=b.getCols())
-    {error("Matrices must have the same number of columns!\n"); return false;}
-
-    bool isEqual= true;
-
-    for(int r= 0; r<a.getRows() && isEqual; r++)
-    {for(int c = 0; c<a.getCols() && isEqual; c++)
-      {isEqual = (a(r,c)==b(r,c));}
-
+bool operator==(const Matrix& a, const Matrix& b)
+{
+  if(a.getCols() != b.getCols() || a.getRows() != b.getRows()  ) return false;
+  bool isEqual = true;
+  for(int i = 0 ; i < a.getRows() && isEqual ; i++){
+    for(int j = 0 ; j < a.getCols() && isEqual ; j++){
+      isEqual = (a(i,j) == b(i,j));
     }
-    return isEqual;
   }
+    return isEqual;
+}
 
 
 
@@ -90,17 +85,18 @@ Matrix operator*(const Matrix& a, const Matrix& b)
 //Output operator will out put matrices in the format with columns separated by ' ' and rows by '\n' you can specify the width of your columns useing setw from <iomanip>
   ostream& operator<<(ostream& os, const Matrix& a)
   {
-    os << endl;
+    os <<endl;
     for(int i = 0; i<a.getRows(); i++)
     {
-      os << endl;
+      //os <<endl;
       for(int j=0; j<a.getCols(); j++)
       {
         os << setw(10)<<setprecision(7)<<a(i,j)<< " ";
+      //  os << endl; //this1
       }
-      os << endl;
+      os << endl; //this
     }
-    os << endl;
+  //os<<endl;
     return os;
   }
 }
