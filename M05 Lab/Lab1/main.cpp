@@ -1,5 +1,7 @@
-#include "std_lib_facilities.h"
+//#include "std_lib_facilities.h"
 #include "Points.h"
+
+//sing namespace Points;
 
 int main ()
 {
@@ -7,23 +9,28 @@ int main ()
   Point p;
   vector<Point> original_points, processed_points;
 
+  //cout << "test";
+
   for ( unsigned int i = 0; i < 7; i++)
   {
+    cout << "(x,y):";
     cin >> points;
     original_points.push_back(points);
-    cout << "(x,y):" << endl;
+
 
   }
 
 
-  for ( unsigned int i = 0; i < original_points.size(); i++)
+  for ( unsigned int i = 0; i < 7; i++) //orginnial_points.size()?
   {
-    cout <<original_points[i];
+    cout <<original_points[i]<< endl;
 
   }
 
 
-  ofstream ofs("mydata.txt");
+  ofstream ofs;
+  ofs.open("mydata.txt");
+
   if (!ofs) error("failed to open mydata.txt");
   for(size_t i = 0; i < original_points.size(); i++)
   {
@@ -32,14 +39,15 @@ int main ()
 
   ofs.close();
 
-  ifstream ist ("mydata.txt");
+  ifstream ist;
+  ist.open("mydata.txt");
   if (!ist) error("Could not open file mydata.txt");
 
   while(ist >> p)
   {processed_points.push_back(p);}
-  ist.close();
+  //ist.close();
 
-  //ofs << original_points;
+  ofs << original_points;
 
   cout << "Data from file:"<< endl;
   //for(unsigned int i =0; i<processed_points.size(); i++)
@@ -48,12 +56,12 @@ int main ()
   {cout << processed_points[i] << endl;}
 
   cout<< "Original data:"<< endl;
-  for(size_t i = 0; i < processed_points.size(); i++)
+  for(size_t i = 0; i < original_points.size(); i++)
   {
     cout << original_points[i] << endl;
   }
 
-  if (original_points != processed_points)
+  if (original_points.size() != processed_points.size())
   cout << "Somthing wrong!" << endl;
 
   //if(original_points == processed_points)
