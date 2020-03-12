@@ -3,23 +3,24 @@
 
 #include "std_lib_facilities.h"
 
-const int not_a_reading = -7777; // less than absolute zero
-const int not_a_month = -1;
+const int not_a_reading = -7777; // less than absolute zero not a possible temperature
+const int not_a_month = -1;      // not a possible month
 
 ///constexpr initializes at compile time
-constexpr int implausible_min = -200;
-constexpr int implausible_max = 200;
+constexpr int implausible_min = -200;   //you could use just const, constexpr
+constexpr int implausible_max = 200;    //initializes faster at compile time
 
 struct Day
 {
     ///initialize hours to a nameless vector with 24 values of not_a_reading
     ///must use {} initialization list syntax
-    vector<double> hours {vector<double>(24,not_a_reading)};
-};
-
+    vector<double> hours {vector<double>(24,not_a_reading)}; //uses new features of c++
+};                                                           //vector<double> hours() would be function declaration
+                                                            // vector<double> {} initialization list
+                                                            //24 double elements and not_a_reading is the initialization value
 struct Month
 { // a month of temperature readings
-    int month {not_a_month}; // [0:11] January is 0 for array indexing
+    int month {not_a_month}; // [0:11] January is 0 for array indexing {} let us give it initial value
     vector<Day> days {32}; // [1:31] one vector of readings per day, skip 0
 };
 
@@ -30,15 +31,18 @@ struct Year
 };
 
 struct Reading
-{
+{ //struct for holding our data while we are reading it in, temporary before we load up days, months, years
     int day;
     int hour;
     double temperature;
 };
 
-istream& operator>>(istream& is, Reading& r);
-istream& operator>>(istream& is, Month& m);
-istream& operator>>(istream& is, Year& y);
+istream& operator>>(istream& is, Reading& r); //operator to read a Reading
+istream& operator>>(istream& is, Month& m);   //operator to read a Month
+istream& operator>>(istream& is, Year& y);    //operator to read a year
+// Reading operator will read till it fails and then move onto the Month, and then when that operator fails it will move onto year operator
+
+
 
 
 ///Print each reading for every month, day, and hour within Year& y
@@ -71,6 +75,7 @@ void end_of_loop(istream& ist, char term, const string& message);
 string int_to_month(int i);
 
 ///index to string conversion arrays
+//all possible strings we could have for month 
 const vector<string> month_input_tbl =
 {
     "jan", "feb", "mar", "apr", "may", "jun", "jul",
