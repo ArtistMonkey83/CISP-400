@@ -3,8 +3,8 @@
 
 #include "Bmp.h"
 
-const rgb RED_PIXEL = {255,0,0};
-const rgb BLUE_PIXEL = {0,0,255};
+const rgb POSSIBLE_PATH = {255,0,180};
+const rgb BEST_PATH = {0,0,180};
 
 class Topograph
 {
@@ -33,14 +33,15 @@ public:
     ///call drawGreedyPath for each startingRow, color red
     ///store the index of the path with lowest elevation change
     ///call drawGreedyPath for the lowest index, color blue
-    void drawBestPath(Bmp& bmp);
+   void drawBestPath(Bmp& bmp);
+   int getMax() const { return max;}
+   int getMin() const {return min;}
+   int getBest() const {return best;}
     ///****************************************************
-
 private:
-    ///**************Part 1********************************
-    void findMin(); // how are we using this if it
-    void findMax(); //doesnt return anything?
-
+    ///**************Part 1*******************************
+    void findMin();
+    void findMax();
     ///scale n from [fromLow:fromHigh] to [toLow:toHigh]
     int mapRange(int n, int fromLow, int fromHigh, int toLow, int toHigh);
 
@@ -49,7 +50,7 @@ private:
     int width;
     int min;
     int max;
-
+    int best;
     ///**************Part 2********************************
     ///Advance (i,j) along its greedy path
     ///Choose the right side adjacent index with the lowest elevation change

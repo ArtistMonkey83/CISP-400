@@ -3,7 +3,7 @@
 #ifndef BMP_H_INCLUDED
 #define BMP_H_INCLUDED
 
-#include "std_lib_facilities.h"
+#include "../std_lib_facilities.h"
 
 ///Look up "Bitmap file header" and "Windows BITMAPINFOHEADER" for specs
 struct BitmapInfoHeader
