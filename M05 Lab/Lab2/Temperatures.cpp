@@ -107,15 +107,17 @@ istream& operator>>(istream& is, Year& y)
 ///string int_to_month(int i)   to convert a month index to a printable string
 ///only print if the reading != not_a_reading
 ostream& operator<<(ostream& os, Year& y)
-{
-/*  os << setprecision(2) << fixed << setw(12) << "year|" << setw(12) <<
+{ /*
+  os << setprecision(2) << fixed << setw(12) << "year|" << setw(12) <<
   "Month|" << setw(12) << "day|" << setw(12) << "hour|" << setw(12) <<
   "reading|" << endl;
   for(int _month = 0; _month < 12; _month++)
   {
-    if(y.month[_month].month != not_a_month])
-    {os << setw(12) << y.month[_month] << '|'}
+    if(y.months[_month].month != not_a_month)
+    {os << setw(12) << y.months[_month] << '|'}
   }
+}
+
 */
 os << "Year: " << y.year;
 
@@ -133,7 +135,35 @@ os << "Year: " << y.year;
       }
     }
   }
+  cout << endl;
 }
+
+
+/*
+os << setprecision(2) << fixed << setw(12) << "year|" << setw(12) <<
+"Month|" << setw(12) << "day|" << setw(12) << "hour|" << setw(12) <<
+"reading|" << endl;
+
+  for (int month_i = 0; month_i < 12; month_i++)
+  {
+    if (y.months[month_i] != not_a_month)
+    {
+      os << setw(12) << int_to_month(month_i) << '|';
+      for (int day_i = 1; day_i < 31; day_i++)
+      {
+        os << setw(12) << day_i << '|';
+        for (int hour_i = 0; hour_i < 24; hour_i++)
+        {
+          if (y.months[month_i].days[day_i].hours.at(hour_i) != not_a_reading)
+          {
+            os << setw(12) << y.months[month_i].days[day_i].hours.at(hour_i) << '|';
+        }
+      }
+    }
+  }
+}*/
+
+
 ///helper functions
 //drill down from year, to month, to days, to reading triple for loop
 
@@ -142,8 +172,9 @@ os << "Year: " << y.year;
 ///Use an array of strings
 int month_to_int(string s)
 {
-  for(int i = 0; i<12; i++)//map container could be used here
-  {if(month_input_tbl[i]==s)return i; return -1;} //if the string is equal to the the value return that value, else return error
+  for(int i = 0; i<12; ++i)//map container could be used here
+  if(month_input_tbl[i]==s)return i;
+  return -1; //if the string is equal to the the value return that value, else return error
 }
 ///Check ranges on day, hour, temperature
 bool is_valid(const Reading& r)
