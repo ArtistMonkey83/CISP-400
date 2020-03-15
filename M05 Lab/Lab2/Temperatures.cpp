@@ -27,7 +27,7 @@ istream& operator>>(istream& is, Month& m)
   if(is>> ch && ch != '{')    //Month starts with a curly bracket! if we dont see a new month set the fail bit
   {
     is.unget();
-    is.clear(iso_base::failbit);
+    is.clear(ios_base::failbit);
     return is;
   }
   string month_marker;
@@ -56,21 +56,21 @@ istream& operator>>(istream& is, Month& m)
     else
       ++invalids;
   }
-  if(invlaids) error("invalid readings in month ", invlaids);
+  if(invalids) error("invalid readings in month ", invalids);
   if(duplicates) error("duplicate readings in month ", duplicates);  //concatenates an int either invalids or duplicates value
 
   end_of_loop(is, '}', "bad end of month");   // if this doesn't throw it got a good closeing } bracket, send back stream
   return is;
 }
 
-istream& operator>>(istream& is, Year& y);
+istream& operator>>(istream& is, Year& y)
 {
   char ch;
   is >> ch;
   if(ch !='{') //looking for the begging of the year which is a curly bracket {
   {
     is.unget();
-    is.clear(iso_base::failbit);
+    is.clear(ios_base::failbit);
     return is;
   }
   string year_marker;
@@ -107,7 +107,33 @@ istream& operator>>(istream& is, Year& y);
 ///string int_to_month(int i)   to convert a month index to a printable string
 ///only print if the reading != not_a_reading
 ostream& operator<<(ostream& os, Year& y)
+{
+/*  os << setprecision(2) << fixed << setw(12) << "year|" << setw(12) <<
+  "Month|" << setw(12) << "day|" << setw(12) << "hour|" << setw(12) <<
+  "reading|" << endl;
+  for(int _month = 0; _month < 12; _month++)
+  {
+    if(y.month[_month].month != not_a_month])
+    {os << setw(12) << y.month[_month] << '|'}
+  }
+*/
+os << "Year: " << y.year;
 
+  for (int month_i = 0; month_i < 12; month_i++) {
+    if (y.months[month_i].month != not_a_month) {
+      os << "\tMonth: " << int_to_month(month_i) << std::endl;
+      for (int day_i = 1; day_i < 31; day_i++) { // list max days for each month
+        os << "\t\tDay: " << day_i << std::endl;
+        for (int hour_i = 0; hour_i < 24; hour_i++) {
+          if (y.months[month_i].days[day_i].hours.at(hour_i) != not_a_reading) {
+            os << "\t\t\tHour: " << hour_i << ", reading: "
+              << y.months[month_i].days[day_i].hours.at(hour_i) << std::endl;
+          }
+        }
+      }
+    }
+  }
+}
 ///helper functions
 //drill down from year, to month, to days, to reading triple for loop
 
@@ -130,15 +156,19 @@ bool is_valid(const Reading& r)
 }
 ///Clear the fail state of the input stream for more reading
 ///Look for the terminating '}'
-void end_of_loop(istream& ist, char term, const string& message);
+void end_of_loop(istream& ist, char term, const string& message)
 {
   if(ist.fail())
   {
     ist.clear();
     char ch;
-    if(ist >> ch %% ch == term) return;
-    error(message)
+    if(ist >> ch && ch == term) return;
+    error(message);
   }
 }
 ///Convert an index to a printable month, uses an array of strings
-string int_to_month(int i);
+string int_to_month(int i)
+{
+  if( i < 0 || i >= 12) {error("Month out of Range!");}
+  return month_print_tbl[i];
+}
