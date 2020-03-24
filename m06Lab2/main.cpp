@@ -14,7 +14,7 @@ int main()
   {
     for(int j = 0; j < 8; ++j)
     {
-      vr.push_back(new Graph_lib::Rectangle(Point( i*100, j*100), 20,20)); //upper left corner of Rectangle
+      vr.push_back(new Graph_lib::Rectangle(Point( i*100, j*100), 100,100)); //upper left corner of Rectangle
       //vr[vr.size()-1].set_fill_color(i*8+j);
       if(i==j) //detect if i am on diagonal
       {
