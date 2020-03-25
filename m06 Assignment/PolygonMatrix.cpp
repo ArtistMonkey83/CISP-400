@@ -14,12 +14,6 @@ PolygonMatrix::PolygonMatrix(int _xPixels, int _yPixels) Matrix pointMatrix(2,0)
   PolygonMatrix.xPixels = _xPixels;
   PolygonMatrix.yPixels = _yPixels;
 
-//do I need Matrix:: ??
-/*?????????
-  Matrix pointMarix(2,0)
-???????????*/
-
-
 }
 
 ///add a pixel vertex to the polygon
@@ -48,7 +42,6 @@ void PolygonMatrix::add(Point p) // passed argument is a pixel vertex from main 
 ///then call updatePixels
 void PolygonMatrix::rotate(double theta)
 {
-  //RotationMatrix::RotationMatrix R(): Matrix(2,2){cos(theta), -sin(theta),sin(theta), cos(theta)};//constructor
   RotationMatrix r(theta);
   pointMatrix = r * pointMatrix;
 
@@ -100,18 +93,17 @@ void PolygonMatrix::updatePixels()
 
 
     Polygon::set_point(temp); //updating point in the graphics lib for later drawing ????Shape::set_point(temp)????
-
   }
 
 }
+
+
+
+
 /*
 Star::Star (inw, int h) : PolygonMatrix(w,h){}
-
 int centerX = w /2;
 int centerY = h/2;
-
 addpoint()
-
 set_fill_color()
-
 */

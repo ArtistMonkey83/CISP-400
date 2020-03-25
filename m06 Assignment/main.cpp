@@ -1,4 +1,4 @@
-#include "../Simple_window.h"
+#include "Simple_window.h"
 #include "PolygonMatrix.h"
 using namespace Graph_lib;  // use our graphics interface library
 

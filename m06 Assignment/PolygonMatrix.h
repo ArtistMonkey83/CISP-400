@@ -60,6 +60,7 @@ namespace Graph_lib
             ///call Shape::set_point to update each pixel
             void updatePixels();
     };
+
     class Star : public PolygonMatrix
     {
     public:

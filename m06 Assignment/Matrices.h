@@ -79,6 +79,20 @@ namespace Matrices
             */
             ///theta represents the angle of rotation in radians, counter-clockwise
             RotationMatrix(double theta);
+
+
+                /*class RotationMatrix : public Matrix
+                {
+                  public:
+                    RotationMatrix(double theta) : Matrix (2,2) {cos(theta),-sin(theta),sin(theta), cos(theta)};//constructor
+                };
+
+                class ScalingMatrix : public Matrix
+                {
+                  public:
+                    ScalingMatrix(double scale) : Matrix(2,2) {scale, 0, 0, scale};
+
+                };*/
     };
 
     ///2D scaling matrix
