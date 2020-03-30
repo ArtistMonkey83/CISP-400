@@ -1,4 +1,3 @@
-
 #include "Simple_window.h"
 //functions to graph
 double one(double x) { return 1; } 		// y==1 constant
@@ -9,13 +8,13 @@ double square(double x) { return x*x; } 	// y==x*x quadratic
 double sloping_cos(double x) { return cos(x)+slope(x); }
 
 ///this return value should be unsigned long long or double
-int fac(int n) { return n <= 1 ? 1 : n * fac(n – 1);}	// factorial
+int fac(int n) { return n <= 1 ? 1 : n * fac(n - 1);}  // factorial
 
 double term(double x, int n) {return pow(x,n)/fac(n);}	// xn/n!
 
 int expN_number_of_terms = 6;	// nasty sneaky argument to expN how many terms to use in Taylor series
                               //end of chapter proposes better ways to implement it
-double expN(double x, int n)	// sum of n terms of Taylor series for ex
+double expN(double x)	// sum of n terms of Taylor series for ex
 {
 	double sum = 0;
 	for (int i = 0; i<expN_number_of_terms; ++i) sum+=term(x,i);
@@ -108,7 +107,7 @@ int main()
 	ostringstream ss;                       //use this like a file
 	ss << "exp approximation; n==" << n ;  //feeding string in to ostringstream with n as how many terms in Taylor series
 	win.set_label(ss.str().c_str());
-	expN_number_of_terms = n;	// nasty sneaky argument to expN
+	expN_number_of_terms = n;	//nasty sneaky argument to expN
 
 	// next approximation:
 	Function e(expN,r_min,r_max,orig,200,x_scale,y_scale); //because of the data type we will tweak out around 18factorial
@@ -119,25 +118,21 @@ int main()
   }
 
 /*
-
 struct Axis : Shape {
 	enum Orientation { x, y, z };            //scoped enum we dint use z!
 	Axis(Orientation d, Point xy, int length,
 		int number_of_notches=0,	             // default: no notches
 		string label = ""			                // default : no label
 		);
-
 	void draw_lines() const;               //override draw_lines()
 	void move(int dx, int dy);             //we want to override move because
                                         //to move axis AND labels and notches!
 	void set_color(Color);	// in case we want to change the color of all parts at once
-
 	// line stored in Shape
 	// orientation not stored (can be deduced from line)
 	Text label;
 	Lines notches;
 };
-
 ///////////constructor that constructs label at (0,0) with what ever string came in to constructor
 Axis::Axis(Orientation d, Point xy, int length, int n, string lab)
 	:label(Point(0,0),lab)
@@ -161,7 +156,6 @@ Axis::Axis(Orientation d, Point xy, int length, int n, string lab)
 	}
 	// …
 }
-
 //////////////
 void Axis::draw_lines() const
 {                       //adding to parents functionality!
@@ -169,16 +163,14 @@ void Axis::draw_lines() const
 	notches.draw_lines();	// the notches may have a different color from the line
 	label.draw();        	// the label may have a different color from the line
 }
-
 void Axis::move(int dx, int dy)
 {
 	Shape::move(dx,dy);	// the line
 	notches.move(dx,dy);
 	label.move(dx,dy);
 }
-
 void Axis::set_color(Color c)     //overriding but not polymorphing
-{                               
+{
 	Shape::set_color(c);
 	notches.set_color(c);
 	label.set_color(c);
