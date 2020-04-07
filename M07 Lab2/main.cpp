@@ -13,7 +13,27 @@ Write the contents of the vector out to the screen (cout)
 int main()
 {
   Person p1;
+  p1.setName("Goofy");
+  p1.setAge(63);
 
+  cout << p1 << endl;
+
+  vector <Person> pData;
+  while (cin >> p1)
+  {pData.push_back(p1);}
+  for (unsigned int i = 0; i <pData.size(); i++)
+  {cout << pData[i] << endl;}
 
   return 0;
 }
+
+
+/*
+
+try
+{
+
+}
+catch(runtime_error& e) {cout << e.what() << endl;}
+
+*/

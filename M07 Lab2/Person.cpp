@@ -35,18 +35,23 @@ Use error() in case of error.
 //default constructor
   Person::Person()
   {
-    if (!ios::fail)
+    if (!ios::fail) error("Input failed!");
+
+    name = " ";
+    age = 0;
   }
 
 //overloaded constructor initializing name and age.
   Person::Person(string _name, int _age)
   {
-    if (!ios::fail)
+    for (int i = 0 ; i < _name.size() ; i++)
     {
-      if (string::find())
-        name = _name;
-        age = _age;
+      if (!((_name[i] >= 48 && _name[i] <= 57) ||
+          (_name[i] >= 65 && _name[i] <= 90) ||
+          (_name[i] >= 97 && _name[i] <= 122)))
+     error("Invalid Character found in name!");
     }
+    else {a.setName(_name);}
 
   }
 
@@ -54,12 +59,22 @@ Use error() in case of error.
 //Assume the input and output are in the format name age
 //Inside the >> operator, construct a Person with the inputs
 //and assign it to the parameter
-  operator >>()
+  istream& operator >>(istream& is, Person& a)
   {
+    string name;
+    int age;
+    is >> name >> age;
 
+    if (is)
+    {
+      //construct a person object with name, age
+      //assign it to a (copy)
+    }
+    return is;
   }
 
-  operator <<()
+  ostream& operator<<(ostream& os, const Person& a)
   {
-
+    os << a.getName() << " " << a.getAge() << endl;
+    return os;
   }
