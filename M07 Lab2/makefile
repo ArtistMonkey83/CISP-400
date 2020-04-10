@@ -1,10 +1,13 @@
 CC = g++
-CFLAGS = -Wall -c std=c++14
-EXENAME = M07
+CCFLAGS = -c -Wall -std=c++14
+EXENAME = M07Lab2
 
-defualt: main.o Person.o
-	$(CFLAGS) $(CC) -o $(EXENAME)
+default: main.o Person.o
+	$(CC) main.o Person.o -o $(EXENAME)
 main.o: main.cpp
-	$(CFLAGS) main.cpp
+	$(CC) $(CCFLAGS) main.cpp
 Person.o: Person.cpp
-	$(CFLAGS) Person.cpp
+	$(CC) $(CCFLAGS) Person.cpp
+
+run:
+	./$(EXENAME)

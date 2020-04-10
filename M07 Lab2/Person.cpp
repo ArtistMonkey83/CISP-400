@@ -51,7 +51,10 @@ Use error() in case of error.
           (_name[i] >= 97 && _name[i] <= 122)))
      error("Invalid Character found in name!");
     }
-    else {a.setName(_name);}
+    else {a.name = _name;}
+
+    if(_age > 0 && _age < 150)
+    {a.age = _age;}
 
   }
 
@@ -59,7 +62,7 @@ Use error() in case of error.
 //Assume the input and output are in the format name age
 //Inside the >> operator, construct a Person with the inputs
 //and assign it to the parameter
-  istream& operator >>(istream& is, Person& a)
+  istream operator >>(istream& is, Person& a)
   {
     string name;
     int age;
@@ -67,13 +70,17 @@ Use error() in case of error.
 
     if (is)
     {
-      //construct a person object with name, age
-      //assign it to a (copy)
+      Person p1;        //construct a person object with name, age
+      p1.setName(name);
+      p2.setAge(age);
+
+      a.setName(p1.getAge());
+      a.setAge(p1.getAge());
     }
     return is;
   }
 
-  ostream& operator<<(ostream& os, const Person& a)
+  ostream operator<<(ostream& os, const Person& a)
   {
     os << a.getName() << " " << a.getAge() << endl;
     return os;
