@@ -47,7 +47,16 @@ void unitTests()
     ZoomWindow win(Point(0,0),x_max(),y_max(),"Unit Tester");
     Text t(Point(50,20), s);
     win.attach(t);
-    win.wait_for_button();
+    win.wait_for_button();///////
+    //////
+    cout << almostEqual(win.getZoom(),1.5) << "value of getZoom" << endl;
+    cout << almostEqual(win.getCenter_r(),2.6) << "value of getCenter_r" << endl;
+    cout << almostEqual(win.getCenter_i(),3.7) << "value of getCenter_i" << endl;
+
+    cout << win.getZoom() << "value of getZoom" << endl;
+    cout << win.getCenter_r() << "value of getCenter_r" << endl;
+    cout << win.getCenter_i() << "value of getCenter_i" << endl;
+
     if(almostEqual(win.getZoom(), 1.5) && almostEqual(win.getCenter_r(), 2.6) && almostEqual(win.getCenter_i(), 3.7))
     {
         cout << " Passed. +3" << endl;
@@ -55,7 +64,7 @@ void unitTests()
     }
     else
     {
-        cout << " Failed." << endl;
+        cout << " Failed. failed here" << endl;
     }
 
     cout << "Testing mapRange...";

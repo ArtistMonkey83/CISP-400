@@ -4,6 +4,7 @@
 #include "ComplexPlane.h"
 #include "Simple_window.h"
 
+
 struct ZoomWindow : Simple_window
 {
     ZoomWindow(Point xy, int w, int h, const string& title);
