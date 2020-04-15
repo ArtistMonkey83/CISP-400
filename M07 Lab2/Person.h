@@ -1,7 +1,7 @@
 #ifndef PERSON_H_INCLUDED
 #define PERSON_H_INCLUDED
 
-#include "../std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
 //Make the representation of Person private
 struct Person

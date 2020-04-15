@@ -1,5 +1,5 @@
 #include "Person.h"
-#include "../std_lib_facilities.h"
+#include "std_lib_facilities.h"
 
 //const member functions getName() and getAge() to read the name and age.
 //check that age is [0:150) and that name doesn’t contain
@@ -41,7 +41,7 @@ Use error() in case of error.
   {
     if(_age <=150 && _age > 0) {this->age = _age;}
     else {error("Age out of range!\n");}
-    for (int i = 0 ; i < _name.size() ; i++)
+    for (size_t i = 0 ; i < _name.size() ; i++)
     {
       if (!((_name[i] >= 48 && _name[i] <= 57) ||
           (_name[i] >= 65 && _name[i] <= 90) ||

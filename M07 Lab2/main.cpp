@@ -6,7 +6,7 @@ Don't worry about prompting. Assume an EOF will be entered at the end of the inp
 Write the contents of the vector out to the screen (cout)
 */
 
-#include "../std_lib_facilities.h"
+#include "std_lib_facilities.h"
 #include "Person.h"
 
 
