@@ -27,7 +27,7 @@ struct Lines_window : Graph_lib::Window
     void change(Color c) {lines.set_color(c);}
     void changeStyle(Line_style c) {lines.set_style(c);} ////////////////style needs changing!!!
     void hide_menu() {color_menu.hide(); menu_button.show();}
-    void hide_style() {style_menu.hide(); styler_button.show();}
+    void hide_style() {style_menu.hide(); style_button.show();}
 
     void red_pressed() {change(Color::red); hide_menu();}
     void blue_pressed() {change(Color::blue); hide_menu();}
@@ -37,7 +37,7 @@ struct Lines_window : Graph_lib::Window
     void style_pressed() {style_button.hide(); style_menu.show();}
 
     void solid_pressed() {changeStyle(Line_style::solid); hide_style();}
-    void dash_pressed() {changeStyle(Line_style::dash).hide_style();}
+    void dash_pressed() {changeStyle(Line_style::dash);hide_style();}
     void dot_pressed() {changeStyle(Line_style::dot); hide_style();}
 
     void next();

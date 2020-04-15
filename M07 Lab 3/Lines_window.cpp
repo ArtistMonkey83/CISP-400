@@ -1,11 +1,11 @@
 #include "Lines_window.h"
 
 Lines_window::Lines_window(Point xy,int w, int h, const string& title) : Window (xy,w,h,title),
-              next_button(Point(x_max()-150,0),70,20,"Next point", cb_next),
-              quit_button()(Point(x_max()-70,0),70,20,"Quit", cb_quit),
-              next_x(Point(x_max()-310,0),50,20,"Next X: "),
-              next_y(Point(x_max()-210,0),50,20,"Next Y: "),
-              xy_out(Point(100,0),100,20,"Current(x,y): "),
+              next_button{Point(x_max()-150,0),70,20,"Next point", cb_next},
+              quit_button{Point(x_max()-70,0),70,20,"Quit", cb_quit},
+              next_x{Point(x_max()-310,0),50,20,"Next X: "},
+              next_y{Point(x_max()-210,0),50,20,"Next Y: "},
+              xy_out{Point(100,0),100,20,"Current(x,y): "},
               color_menu{Point{x_max()-70,30},60,20, Menu::vertical, "color"},
               menu_button{Point{x_max()-80,30},80,20, "color menu", cb_menu},
               style_menu{Point{x_max-100,30},70,20, Menu::vertical,"style"},
