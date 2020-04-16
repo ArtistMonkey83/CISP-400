@@ -50,6 +50,8 @@ struct Lines_window : Graph_lib::Window
     static void cb_style(Address, Address pw);
     static void cb_quit(Address, Address pw);
     static void cb_next(Address, Address pw);
-
+    static void cb_solid(Address, Address pw);
+    static void cb_dash(Address, Address pw);
+    static void cb_dot(Address, Address pw);
 };
 #endif

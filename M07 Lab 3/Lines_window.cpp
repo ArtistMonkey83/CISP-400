@@ -6,10 +6,10 @@ Lines_window::Lines_window(Point xy,int w, int h, const string& title) : Window 
               next_x{Point(x_max()-310,0),50,20,"Next X: "},
               next_y{Point(x_max()-210,0),50,20,"Next Y: "},
               xy_out{Point(100,0),100,20,"Current(x,y): "},
-              color_menu{Point{x_max()-70,30},60,20, Menu::vertical, "color"},
+              color_menu{Point{x_max()-60,30},60,20, Menu::vertical, "color"},
               menu_button{Point{x_max()-80,30},80,20, "color menu", cb_menu},
-              style_menu{Point{x_max-100,30},70,20, Menu::vertical,"style"},
-              style_button{Point{x_max()-100,30},80,20,"style menu", cb_style}
+              style_menu{Point{x_max()-200,30},70,20, Menu::vertical,"style"},
+              style_button{Point{x_max()-200,30},80,20,"style menu", cb_style}
 {
   attach(next_button);
   attach(quit_button);
@@ -17,16 +17,27 @@ Lines_window::Lines_window(Point xy,int w, int h, const string& title) : Window 
   attach(next_y);
   attach(xy_out);
   xy_out.put("no point");
-  color_menu.attach(new Button{Point{0,0}, 0,0 "red",cb_red});
-  color_menu.attach(new Button{Point{0,0}, 0,0 "blue",cb_blue});
-  color_menu.attach(new Button{Point{0,0}, 0,0 "black",cb_black});
+  color_menu.attach(new Button{Point{0,0}, 0,0, "red",cb_red});
+  color_menu.attach(new Button{Point{0,0}, 0,0, "blue",cb_blue});
+  color_menu.attach(new Button{Point{0,0}, 0,0, "black",cb_black});
+  style_menu.attach(new Button{Point{0,0}, 0,0, "solid",cb_solid});
+  style_menu.attach(new Button{Point{0,0}, 0,0, "dot",cb_dot});
+  style_menu.attach(new Button{Point{0,0}, 0,0, "dash",cb_dash});
+  //attached to color menu
   attach(color_menu);
+  //segmentation fault
   attach(style_menu);
+  //not here
   color_menu.hide();
+
   style_menu.hide();
+  //faults
   attach(menu_button);
+  //faults
   attach(style_button);
+  //segmentation fault
   attach(lines);
+
 }
 
 void Lines_window::cb_menu(Address,Address pw)
@@ -65,7 +76,7 @@ void Lines_window::next()
 void Lines_window::cb_quit(Address,Address pw)
 { reference_to<Lines_window>(pw).quit();}
 
-void Lines_window:: cb_style(Addres,Address pw)
+void Lines_window:: cb_style(Address,Address pw)
 {reference_to<Lines_window>(pw).style_pressed();}
 
 void Lines_window::cb_solid(Address,Address pw)
