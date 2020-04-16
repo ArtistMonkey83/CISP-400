@@ -1,5 +1,15 @@
 #include"ZoomWindow.h"
+//
+//(-.55110001,-.6279205110)
+//(-1.401155,0)
+//(-0.1528,1.03797)
+//(-0.77568377,0.13646737) THIS IS THE COOOLEST
+//(-1.54368901269109,0)
 
+/////
+/////.0004,.33833,.4564333
+/////1.5,-1.401155,0
+///
 /*
 Construct the three In_box members in an intialization list and then attach them, as you have done in the lab.  Position them to be in line with the next button at the top of the window.
 Initialize center_r to 0, center_i to 0, and zoom to 1.0.

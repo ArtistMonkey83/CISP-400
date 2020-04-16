@@ -57,7 +57,10 @@ two ints for width and height of the image, in pixel
 draw_lines will be called automatically by the graphics engine every time the Window needs to be refreshed,
 so we should not do any other computation in this function.
 */
-void ComplexPlane::draw_lines() const{}
+void ComplexPlane::draw_lines() const
+{
+  fl_draw_image(buf,0,y_pixel_offset,xPixels,yPixels);
+}
 
 ///this function is called in main when the complex plane changes
 ///for each pixel, map it to a point on the complex plane
@@ -81,14 +84,35 @@ To put it all together, createBuffer will take on the following structure:
 void ComplexPlane::createBuffer()
 {
     ///calculate the endpoints of the real and imaginary axes for mapping
+    double re_left= center.real() - (reRange /2)*zoomLevel,
+           re_right= center.real() + (reRange/2)*zoomLevel,
+           im_bottom = center.imag() -(imRange /2)*zoomLevel,
+           im_top = center.imag() + (imRange/2)*zoomLevel;
+
     for(int i = 0; i <= yPixels - pxResolution; i+=pxResolution)
     {
         for(int j = 0; j <= xPixels - pxResolution; j+=pxResolution)
         {
-            ///map j to a real number
-            double re = mapRange(double(j),0,double(xPixels),center.real()-(reRange/2)*zoomLevel, reRange*zoomLevel);
-            ///map i to an imaginary number
-            double im = mapRange(double(i),double(yPixels),0,center.imag()-(imRange/2)*zoomLevel, imRange*zoomLevel);
+            ///map j to a real number = x axis
+            //double mapRange(double n, double fromLow, double fromHigh, double toLow, double toHigh)
+            //{return toLow+((double)n - fromLow)*(toHigh-toLow)/(fromHigh-fromLow);
+            // center.real()- (reRange/2) * zoomLevel shifts the bottom left corner
+
+            double re = mapRange(double(j),0,double(xPixels),re_left,re_right);
+            ////////////Second try //////////
+            //double re = mapRange(double(j),0.0,double(xPixels),re_bottom,re_top);
+
+            ////////////first try ///////////
+            //double re = mapRange(double(j),0,double(xPixels),center.real()-(reRange/2)*zoomLevel, reRange);   //reRange*zoomLevel incorrect!
+
+            ///map i to an imaginary number = y axis
+
+            double im = mapRange(double(i),double(yPixels),0.0,im_bottom, im_top);
+            ////////////Second try //////////
+            //double im = mapRange(double(i),double(yPixels),0.0,im_bottom,im_top);
+            //////////First try////////////
+            //double im = mapRange(double(i),double(yPixels),0,center.imag()-(imRange/2)*zoomLevel, imRange);
+
             ///call countIterations and save its return value in an int called iterations
             int iterations = countIterations(re,im, maxIterations);
             unsigned char r,g,b;
