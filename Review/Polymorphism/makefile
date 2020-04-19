@@ -1,13 +1,13 @@
 CC = g++
-CCFLAGS = -c -Wall -std=1c++14
-EXENAME = FileIO
+CCFLAGS = -c -Wall -std=c++14
+EXENAME = Polymorphism
 
-default: main.o PolyMorphism.o
-	$(CC) main.o PolyMorphism.o -o $(EXENAME)
+default: main.o Employee.o
+	$(CC) main.o Employee.o -o $(EXENAME)
 main.o: main.cpp
 	$(CC) $(CCFLAGS) main.cpp
-PolyMorphism.o: PolyMorphism.cpp
-	$(CC) $(CCFLAGS) PolyMorphism.cpp
+Employee.o: Employee.cpp
+	$(CC) $(CCFLAGS) Employee.cpp
 
 clean:
 	rm *o $(EXENAME)

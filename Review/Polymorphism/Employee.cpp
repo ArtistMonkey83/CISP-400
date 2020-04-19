@@ -36,23 +36,28 @@
 //printInfo() const override : void
 //getAnnualBonus() const : int
 #include"Employee.h"
-
-void printEmployee(Employee* e)
+////////First Try///////
+/*void printEmployee(Employee* e)
 {
   e->printInfo();
   //e->getAnnualBonus();
   if(e-> getAnnualBonus() !=0)
   {cout < "Employee's Annual Bonus: " << e->getAnnualBonus() << endl;}
 }
+*/
+void printEmployee(Employee* e)
+{
+  e->printInfo();
+  cout << endl,
+  e->getAnnualBonus();
+}
 
 void EmployeeStaff::printInfo() const
-{count << "\nStaff " << name << " Salary: " << salary << endl;}
+{cout << "\nStaff: " << name << " Salary: " << salary << endl;}
 
 
 ///is this finished?
-int EmployeeManager::getAnnualBonus() const {return numManaged*45+;}
+int EmployeeManager::getAnnualBonus() const {return numManaged*45 + salary*0.2;} //salary *0.1 + numManaged *500;????
 
-//int EmployeeStaff::getAnnualBonus() const {return 0;}
-
-void EmployeeManager:: printInfor() const
+void EmployeeManager:: printInfo() const
 { cout << "\nManager " << name << " Salary: " << salary << endl;}
