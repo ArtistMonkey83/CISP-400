@@ -60,6 +60,7 @@ bool ZoomWindow::wait_for_button()
   iss3.clear();
   iss3.str("");
 
+//////First Try/////////
   //cout << center_i << endl;
   //input = next_r.get_string();
   //istringstream iss (input);
