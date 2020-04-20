@@ -56,8 +56,7 @@ void EmployeeStaff::printInfo() const
 {cout << "\nStaff: " << name << " Salary: " << salary << endl;}
 
 
-///is this finished?
-int EmployeeManager::getAnnualBonus() const {return numManaged*45 + salary*0.2;} //salary *0.1 + numManaged *500;????
+int EmployeeManager::getAnnualBonus() const {return numManaged*45 + salary*0.2;}
 
 void EmployeeManager:: printInfo() const
-{ cout << "\nManager " << name << " Salary: " << salary << endl;}
+{ cout << "\nManager " << name << " Salary: " << salary;}
