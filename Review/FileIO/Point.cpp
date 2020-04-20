@@ -1,5 +1,6 @@
 #include"Point.h"
 
+/////First Try using getters and setters
 //set the private members x, y, z to a double
 /*
 double Point::setX(double _x)
